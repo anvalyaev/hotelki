@@ -6,8 +6,8 @@ option objc_class_prefix = "HTP";
 package hot;
 
 service Hot {
-    rpc initAuthorize(Auth) returns (User) {}
-    rpc initRegister(Auth) returns (User) {}
+    rpc initAuthorize(AuthRequest) returns (AuthAnswer) {}
+    rpc initRegister(AuthRequest) returns (AuthAnswer) {}
     rpc getWishList(Token) returns (WishList) {}
     rpc getFamily(Token) returns (Family) {}
 
@@ -19,52 +19,65 @@ service Hot {
 }
 
 
+message Token {
+    string token = 1;
+}
+
 message Success {
     bool status = 1;
     int32 err = 2;
 }
 
-message Auth {
+message AuthRequest {
     string name = 1;
     string password = 2;
-    int32 phone = 3;
+    string phone = 3;
 }
 
-message Token {
-    string id = 1;
+message AuthAnswer {
+    string token = 1;
+    bool status = 2;
+    int32 err = 3;
+    User user = 4; 
 }
 
 message User {
-    Token user_id = 1;
-    Auth auth = 2;
+    string usr_id = 1;
+    string name = 2;
+    string password = 3;
+    string phone = 4;
 }
 
 message WishListEvent{
-    WishItem wishItem = 1;
-    int32 indexBefore = 2;
-    int32 indexAfter = 3;
+    string token = 1;
+    string wi_id = 2;
+    string wl_id = 3;
+    int32 indexBefore = 4;
+    int32 indexAfter = 5;
 }
 
 message WishFamilyEvent{
-    User user = 1;
-    int32 indexBefore = 2;
-    int32 indexAfter = 3;
+    string token = 1;
+    string usr_id = 2;
+    string f_id = 3;
+    int32 indexBefore = 4;
+    int32 indexAfter = 5;
 }
 
 
 message Family {
-    string id = 1;
+    string f_id = 1;
     string name = 2;
     repeated User users = 3;
 }
 
 message WishItem {
-    string id = 1;
+    string wi_id = 1;
     string name = 2;
 }
 
 message WishList {
-    string id = 1;
+    string wl_id = 1;
     string name = 2;
     repeated WishItem wishItem = 3;
 }

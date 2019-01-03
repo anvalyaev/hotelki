@@ -9,6 +9,32 @@ import 'dart:core' show int, bool, double, String, List, Map, override;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+class Token extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Token', package: const $pb.PackageName('hot'))
+    ..aOS(1, 'token')
+    ..hasRequiredFields = false
+  ;
+
+  Token() : super();
+  Token.fromBuffer(List<int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+  Token.fromJson(String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+  Token clone() => new Token()..mergeFromMessage(this);
+  Token copyWith(void Function(Token) updates) => super.copyWith((message) => updates(message as Token));
+  $pb.BuilderInfo get info_ => _i;
+  static Token create() => new Token();
+  static $pb.PbList<Token> createRepeated() => new $pb.PbList<Token>();
+  static Token getDefault() => _defaultInstance ??= create()..freeze();
+  static Token _defaultInstance;
+  static void $checkItem(Token v) {
+    if (v is! Token) $pb.checkItemFailed(v, _i.qualifiedMessageName);
+  }
+
+  String get token => $_getS(0, '');
+  set token(String v) { $_setString(0, v); }
+  bool hasToken() => $_has(0);
+  void clearToken() => clearField(1);
+}
+
 class Success extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Success', package: const $pb.PackageName('hot'))
     ..aOB(1, 'status')
@@ -41,26 +67,26 @@ class Success extends $pb.GeneratedMessage {
   void clearErr() => clearField(2);
 }
 
-class Auth extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Auth', package: const $pb.PackageName('hot'))
+class AuthRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('AuthRequest', package: const $pb.PackageName('hot'))
     ..aOS(1, 'name')
     ..aOS(2, 'password')
-    ..a<int>(3, 'phone', $pb.PbFieldType.O3)
+    ..aOS(3, 'phone')
     ..hasRequiredFields = false
   ;
 
-  Auth() : super();
-  Auth.fromBuffer(List<int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
-  Auth.fromJson(String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
-  Auth clone() => new Auth()..mergeFromMessage(this);
-  Auth copyWith(void Function(Auth) updates) => super.copyWith((message) => updates(message as Auth));
+  AuthRequest() : super();
+  AuthRequest.fromBuffer(List<int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+  AuthRequest.fromJson(String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+  AuthRequest clone() => new AuthRequest()..mergeFromMessage(this);
+  AuthRequest copyWith(void Function(AuthRequest) updates) => super.copyWith((message) => updates(message as AuthRequest));
   $pb.BuilderInfo get info_ => _i;
-  static Auth create() => new Auth();
-  static $pb.PbList<Auth> createRepeated() => new $pb.PbList<Auth>();
-  static Auth getDefault() => _defaultInstance ??= create()..freeze();
-  static Auth _defaultInstance;
-  static void $checkItem(Auth v) {
-    if (v is! Auth) $pb.checkItemFailed(v, _i.qualifiedMessageName);
+  static AuthRequest create() => new AuthRequest();
+  static $pb.PbList<AuthRequest> createRepeated() => new $pb.PbList<AuthRequest>();
+  static AuthRequest getDefault() => _defaultInstance ??= create()..freeze();
+  static AuthRequest _defaultInstance;
+  static void $checkItem(AuthRequest v) {
+    if (v is! AuthRequest) $pb.checkItemFailed(v, _i.qualifiedMessageName);
   }
 
   String get name => $_getS(0, '');
@@ -73,42 +99,62 @@ class Auth extends $pb.GeneratedMessage {
   bool hasPassword() => $_has(1);
   void clearPassword() => clearField(2);
 
-  int get phone => $_get(2, 0);
-  set phone(int v) { $_setSignedInt32(2, v); }
+  String get phone => $_getS(2, '');
+  set phone(String v) { $_setString(2, v); }
   bool hasPhone() => $_has(2);
   void clearPhone() => clearField(3);
 }
 
-class Token extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Token', package: const $pb.PackageName('hot'))
-    ..aOS(1, 'id')
+class AuthAnswer extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('AuthAnswer', package: const $pb.PackageName('hot'))
+    ..aOS(1, 'token')
+    ..aOB(2, 'status')
+    ..a<int>(3, 'err', $pb.PbFieldType.O3)
+    ..a<User>(4, 'user', $pb.PbFieldType.OM, User.getDefault, User.create)
     ..hasRequiredFields = false
   ;
 
-  Token() : super();
-  Token.fromBuffer(List<int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
-  Token.fromJson(String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
-  Token clone() => new Token()..mergeFromMessage(this);
-  Token copyWith(void Function(Token) updates) => super.copyWith((message) => updates(message as Token));
+  AuthAnswer() : super();
+  AuthAnswer.fromBuffer(List<int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+  AuthAnswer.fromJson(String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+  AuthAnswer clone() => new AuthAnswer()..mergeFromMessage(this);
+  AuthAnswer copyWith(void Function(AuthAnswer) updates) => super.copyWith((message) => updates(message as AuthAnswer));
   $pb.BuilderInfo get info_ => _i;
-  static Token create() => new Token();
-  static $pb.PbList<Token> createRepeated() => new $pb.PbList<Token>();
-  static Token getDefault() => _defaultInstance ??= create()..freeze();
-  static Token _defaultInstance;
-  static void $checkItem(Token v) {
-    if (v is! Token) $pb.checkItemFailed(v, _i.qualifiedMessageName);
+  static AuthAnswer create() => new AuthAnswer();
+  static $pb.PbList<AuthAnswer> createRepeated() => new $pb.PbList<AuthAnswer>();
+  static AuthAnswer getDefault() => _defaultInstance ??= create()..freeze();
+  static AuthAnswer _defaultInstance;
+  static void $checkItem(AuthAnswer v) {
+    if (v is! AuthAnswer) $pb.checkItemFailed(v, _i.qualifiedMessageName);
   }
 
-  String get id => $_getS(0, '');
-  set id(String v) { $_setString(0, v); }
-  bool hasId() => $_has(0);
-  void clearId() => clearField(1);
+  String get token => $_getS(0, '');
+  set token(String v) { $_setString(0, v); }
+  bool hasToken() => $_has(0);
+  void clearToken() => clearField(1);
+
+  bool get status => $_get(1, false);
+  set status(bool v) { $_setBool(1, v); }
+  bool hasStatus() => $_has(1);
+  void clearStatus() => clearField(2);
+
+  int get err => $_get(2, 0);
+  set err(int v) { $_setSignedInt32(2, v); }
+  bool hasErr() => $_has(2);
+  void clearErr() => clearField(3);
+
+  User get user => $_getN(3);
+  set user(User v) { setField(4, v); }
+  bool hasUser() => $_has(3);
+  void clearUser() => clearField(4);
 }
 
 class User extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('User', package: const $pb.PackageName('hot'))
-    ..a<Token>(1, 'userId', $pb.PbFieldType.OM, Token.getDefault, Token.create)
-    ..a<Auth>(2, 'auth', $pb.PbFieldType.OM, Auth.getDefault, Auth.create)
+    ..aOS(1, 'usrId')
+    ..aOS(2, 'name')
+    ..aOS(3, 'password')
+    ..aOS(4, 'phone')
     ..hasRequiredFields = false
   ;
 
@@ -126,22 +172,34 @@ class User extends $pb.GeneratedMessage {
     if (v is! User) $pb.checkItemFailed(v, _i.qualifiedMessageName);
   }
 
-  Token get userId => $_getN(0);
-  set userId(Token v) { setField(1, v); }
-  bool hasUserId() => $_has(0);
-  void clearUserId() => clearField(1);
+  String get usrId => $_getS(0, '');
+  set usrId(String v) { $_setString(0, v); }
+  bool hasUsrId() => $_has(0);
+  void clearUsrId() => clearField(1);
 
-  Auth get auth => $_getN(1);
-  set auth(Auth v) { setField(2, v); }
-  bool hasAuth() => $_has(1);
-  void clearAuth() => clearField(2);
+  String get name => $_getS(1, '');
+  set name(String v) { $_setString(1, v); }
+  bool hasName() => $_has(1);
+  void clearName() => clearField(2);
+
+  String get password => $_getS(2, '');
+  set password(String v) { $_setString(2, v); }
+  bool hasPassword() => $_has(2);
+  void clearPassword() => clearField(3);
+
+  String get phone => $_getS(3, '');
+  set phone(String v) { $_setString(3, v); }
+  bool hasPhone() => $_has(3);
+  void clearPhone() => clearField(4);
 }
 
 class WishListEvent extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('WishListEvent', package: const $pb.PackageName('hot'))
-    ..a<WishItem>(1, 'wishItem', $pb.PbFieldType.OM, WishItem.getDefault, WishItem.create)
-    ..a<int>(2, 'indexBefore', $pb.PbFieldType.O3)
-    ..a<int>(3, 'indexAfter', $pb.PbFieldType.O3)
+    ..aOS(1, 'token')
+    ..aOS(2, 'wiId')
+    ..aOS(3, 'wlId')
+    ..a<int>(4, 'indexBefore', $pb.PbFieldType.O3)
+    ..a<int>(5, 'indexAfter', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -159,27 +217,39 @@ class WishListEvent extends $pb.GeneratedMessage {
     if (v is! WishListEvent) $pb.checkItemFailed(v, _i.qualifiedMessageName);
   }
 
-  WishItem get wishItem => $_getN(0);
-  set wishItem(WishItem v) { setField(1, v); }
-  bool hasWishItem() => $_has(0);
-  void clearWishItem() => clearField(1);
+  String get token => $_getS(0, '');
+  set token(String v) { $_setString(0, v); }
+  bool hasToken() => $_has(0);
+  void clearToken() => clearField(1);
 
-  int get indexBefore => $_get(1, 0);
-  set indexBefore(int v) { $_setSignedInt32(1, v); }
-  bool hasIndexBefore() => $_has(1);
-  void clearIndexBefore() => clearField(2);
+  String get wiId => $_getS(1, '');
+  set wiId(String v) { $_setString(1, v); }
+  bool hasWiId() => $_has(1);
+  void clearWiId() => clearField(2);
 
-  int get indexAfter => $_get(2, 0);
-  set indexAfter(int v) { $_setSignedInt32(2, v); }
-  bool hasIndexAfter() => $_has(2);
-  void clearIndexAfter() => clearField(3);
+  String get wlId => $_getS(2, '');
+  set wlId(String v) { $_setString(2, v); }
+  bool hasWlId() => $_has(2);
+  void clearWlId() => clearField(3);
+
+  int get indexBefore => $_get(3, 0);
+  set indexBefore(int v) { $_setSignedInt32(3, v); }
+  bool hasIndexBefore() => $_has(3);
+  void clearIndexBefore() => clearField(4);
+
+  int get indexAfter => $_get(4, 0);
+  set indexAfter(int v) { $_setSignedInt32(4, v); }
+  bool hasIndexAfter() => $_has(4);
+  void clearIndexAfter() => clearField(5);
 }
 
 class WishFamilyEvent extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('WishFamilyEvent', package: const $pb.PackageName('hot'))
-    ..a<User>(1, 'user', $pb.PbFieldType.OM, User.getDefault, User.create)
-    ..a<int>(2, 'indexBefore', $pb.PbFieldType.O3)
-    ..a<int>(3, 'indexAfter', $pb.PbFieldType.O3)
+    ..aOS(1, 'token')
+    ..aOS(2, 'usrId')
+    ..aOS(3, 'fId')
+    ..a<int>(4, 'indexBefore', $pb.PbFieldType.O3)
+    ..a<int>(5, 'indexAfter', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -197,25 +267,35 @@ class WishFamilyEvent extends $pb.GeneratedMessage {
     if (v is! WishFamilyEvent) $pb.checkItemFailed(v, _i.qualifiedMessageName);
   }
 
-  User get user => $_getN(0);
-  set user(User v) { setField(1, v); }
-  bool hasUser() => $_has(0);
-  void clearUser() => clearField(1);
+  String get token => $_getS(0, '');
+  set token(String v) { $_setString(0, v); }
+  bool hasToken() => $_has(0);
+  void clearToken() => clearField(1);
 
-  int get indexBefore => $_get(1, 0);
-  set indexBefore(int v) { $_setSignedInt32(1, v); }
-  bool hasIndexBefore() => $_has(1);
-  void clearIndexBefore() => clearField(2);
+  String get usrId => $_getS(1, '');
+  set usrId(String v) { $_setString(1, v); }
+  bool hasUsrId() => $_has(1);
+  void clearUsrId() => clearField(2);
 
-  int get indexAfter => $_get(2, 0);
-  set indexAfter(int v) { $_setSignedInt32(2, v); }
-  bool hasIndexAfter() => $_has(2);
-  void clearIndexAfter() => clearField(3);
+  String get fId => $_getS(2, '');
+  set fId(String v) { $_setString(2, v); }
+  bool hasFId() => $_has(2);
+  void clearFId() => clearField(3);
+
+  int get indexBefore => $_get(3, 0);
+  set indexBefore(int v) { $_setSignedInt32(3, v); }
+  bool hasIndexBefore() => $_has(3);
+  void clearIndexBefore() => clearField(4);
+
+  int get indexAfter => $_get(4, 0);
+  set indexAfter(int v) { $_setSignedInt32(4, v); }
+  bool hasIndexAfter() => $_has(4);
+  void clearIndexAfter() => clearField(5);
 }
 
 class Family extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Family', package: const $pb.PackageName('hot'))
-    ..aOS(1, 'id')
+    ..aOS(1, 'fId')
     ..aOS(2, 'name')
     ..pp<User>(3, 'users', $pb.PbFieldType.PM, User.$checkItem, User.create)
     ..hasRequiredFields = false
@@ -235,10 +315,10 @@ class Family extends $pb.GeneratedMessage {
     if (v is! Family) $pb.checkItemFailed(v, _i.qualifiedMessageName);
   }
 
-  String get id => $_getS(0, '');
-  set id(String v) { $_setString(0, v); }
-  bool hasId() => $_has(0);
-  void clearId() => clearField(1);
+  String get fId => $_getS(0, '');
+  set fId(String v) { $_setString(0, v); }
+  bool hasFId() => $_has(0);
+  void clearFId() => clearField(1);
 
   String get name => $_getS(1, '');
   set name(String v) { $_setString(1, v); }
@@ -250,7 +330,7 @@ class Family extends $pb.GeneratedMessage {
 
 class WishItem extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('WishItem', package: const $pb.PackageName('hot'))
-    ..aOS(1, 'id')
+    ..aOS(1, 'wiId')
     ..aOS(2, 'name')
     ..hasRequiredFields = false
   ;
@@ -269,10 +349,10 @@ class WishItem extends $pb.GeneratedMessage {
     if (v is! WishItem) $pb.checkItemFailed(v, _i.qualifiedMessageName);
   }
 
-  String get id => $_getS(0, '');
-  set id(String v) { $_setString(0, v); }
-  bool hasId() => $_has(0);
-  void clearId() => clearField(1);
+  String get wiId => $_getS(0, '');
+  set wiId(String v) { $_setString(0, v); }
+  bool hasWiId() => $_has(0);
+  void clearWiId() => clearField(1);
 
   String get name => $_getS(1, '');
   set name(String v) { $_setString(1, v); }
@@ -282,7 +362,7 @@ class WishItem extends $pb.GeneratedMessage {
 
 class WishList extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('WishList', package: const $pb.PackageName('hot'))
-    ..aOS(1, 'id')
+    ..aOS(1, 'wlId')
     ..aOS(2, 'name')
     ..pp<WishItem>(3, 'wishItem', $pb.PbFieldType.PM, WishItem.$checkItem, WishItem.create)
     ..hasRequiredFields = false
@@ -302,10 +382,10 @@ class WishList extends $pb.GeneratedMessage {
     if (v is! WishList) $pb.checkItemFailed(v, _i.qualifiedMessageName);
   }
 
-  String get id => $_getS(0, '');
-  set id(String v) { $_setString(0, v); }
-  bool hasId() => $_has(0);
-  void clearId() => clearField(1);
+  String get wlId => $_getS(0, '');
+  set wlId(String v) { $_setString(0, v); }
+  bool hasWlId() => $_has(0);
+  void clearWlId() => clearField(1);
 
   String get name => $_getS(1, '');
   set name(String v) { $_setString(1, v); }

@@ -15,16 +15,18 @@ class HotService extends HotServiceBase {
   final Uuid uuid = new Uuid();
   @override
   Future<User> initAuthorize(grpc.ServiceCall call, Auth request) async {
-    List<Map> result = await usersDb.find(request.writeToJsonMap());
-    if(result.length != 1) return null;
+    print("initAuthorize $request");
+    // List<Map> result = await usersDb.find(request.writeToJsonMap());
+    // if(result.length != 1) return null;
     User user = new User();
-    user.mergeFromJsonMap(result[0]);
+    user.auth = request;
+    // user.mergeFromJsonMap(result[0]);
     return user;
   }
 
   @override
   Future<User> initRegister(grpc.ServiceCall call, Auth request) async {
-    
+    print("initRegister $request");
     Token newToken = new Token();
     newToken.id = uuid.v1();
 
@@ -39,38 +41,44 @@ class HotService extends HotServiceBase {
 
   @override
   Future<WishList> getWishList(grpc.ServiceCall call, Token request) async {
+    print("getWishList $request");
     // TODO: implement getWishList
-    return null;
+    return new WishList();
   }
 
   @override
   Future<Family> getFamily(grpc.ServiceCall call, Token request) async {
+    print("getFamily $request");
     // TODO: implement getFamily
     return null;
   }
 
   @override
   Stream<WishListEvent> subscribeWishList(grpc.ServiceCall call, Token request) async* {
+    print("subscribeWishList $request");
     // TODO: implement subscribeWishList
-    yield null;
+    yield new WishListEvent();
   }
 
   @override
   Stream<WishFamilyEvent> subscribeFamily(grpc.ServiceCall call, Token request) async* {
+    print("subscribeFamily $request");
     // TODO: implement subscribeFamily
-    yield null;
+    yield new WishFamilyEvent();
   }
 
   @override
   Future<Success> changeWishList(grpc.ServiceCall call, WishListEvent request) async {
+    print("changeWishList $request");
     // TODO: implement changeWishList
-    return null;
+    return new Success();
   }
 
   @override
   Future<Success> changeFamily(grpc.ServiceCall call, WishFamilyEvent request) async {
+    print("changeFamily $request");
     // TODO: implement changeFamily
-    return null;
+    return new Success();
   }
 
 }

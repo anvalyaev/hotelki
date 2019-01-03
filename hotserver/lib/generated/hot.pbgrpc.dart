@@ -12,14 +12,14 @@ import 'hot.pb.dart';
 export 'hot.pb.dart';
 
 class HotClient extends Client {
-  static final _$initAuthorize = new ClientMethod<Auth, User>(
+  static final _$initAuthorize = new ClientMethod<AuthRequest, AuthAnswer>(
       '/hot.Hot/initAuthorize',
-      (Auth value) => value.writeToBuffer(),
-      (List<int> value) => new User.fromBuffer(value));
-  static final _$initRegister = new ClientMethod<Auth, User>(
+      (AuthRequest value) => value.writeToBuffer(),
+      (List<int> value) => new AuthAnswer.fromBuffer(value));
+  static final _$initRegister = new ClientMethod<AuthRequest, AuthAnswer>(
       '/hot.Hot/initRegister',
-      (Auth value) => value.writeToBuffer(),
-      (List<int> value) => new User.fromBuffer(value));
+      (AuthRequest value) => value.writeToBuffer(),
+      (List<int> value) => new AuthAnswer.fromBuffer(value));
   static final _$getWishList = new ClientMethod<Token, WishList>(
       '/hot.Hot/getWishList',
       (Token value) => value.writeToBuffer(),
@@ -48,14 +48,16 @@ class HotClient extends Client {
   HotClient(ClientChannel channel, {CallOptions options})
       : super(channel, options: options);
 
-  ResponseFuture<User> initAuthorize(Auth request, {CallOptions options}) {
+  ResponseFuture<AuthAnswer> initAuthorize(AuthRequest request,
+      {CallOptions options}) {
     final call = $createCall(
         _$initAuthorize, new $async.Stream.fromIterable([request]),
         options: options);
     return new ResponseFuture(call);
   }
 
-  ResponseFuture<User> initRegister(Auth request, {CallOptions options}) {
+  ResponseFuture<AuthAnswer> initRegister(AuthRequest request,
+      {CallOptions options}) {
     final call = $createCall(
         _$initRegister, new $async.Stream.fromIterable([request]),
         options: options);
@@ -113,20 +115,20 @@ abstract class HotServiceBase extends Service {
   String get $name => 'hot.Hot';
 
   HotServiceBase() {
-    $addMethod(new ServiceMethod<Auth, User>(
+    $addMethod(new ServiceMethod<AuthRequest, AuthAnswer>(
         'initAuthorize',
         initAuthorize_Pre,
         false,
         false,
-        (List<int> value) => new Auth.fromBuffer(value),
-        (User value) => value.writeToBuffer()));
-    $addMethod(new ServiceMethod<Auth, User>(
+        (List<int> value) => new AuthRequest.fromBuffer(value),
+        (AuthAnswer value) => value.writeToBuffer()));
+    $addMethod(new ServiceMethod<AuthRequest, AuthAnswer>(
         'initRegister',
         initRegister_Pre,
         false,
         false,
-        (List<int> value) => new Auth.fromBuffer(value),
-        (User value) => value.writeToBuffer()));
+        (List<int> value) => new AuthRequest.fromBuffer(value),
+        (AuthAnswer value) => value.writeToBuffer()));
     $addMethod(new ServiceMethod<Token, WishList>(
         'getWishList',
         getWishList_Pre,
@@ -171,12 +173,12 @@ abstract class HotServiceBase extends Service {
         (Success value) => value.writeToBuffer()));
   }
 
-  $async.Future<User> initAuthorize_Pre(
+  $async.Future<AuthAnswer> initAuthorize_Pre(
       ServiceCall call, $async.Future request) async {
     return initAuthorize(call, await request);
   }
 
-  $async.Future<User> initRegister_Pre(
+  $async.Future<AuthAnswer> initRegister_Pre(
       ServiceCall call, $async.Future request) async {
     return initRegister(call, await request);
   }
@@ -211,8 +213,9 @@ abstract class HotServiceBase extends Service {
     return changeFamily(call, await request);
   }
 
-  $async.Future<User> initAuthorize(ServiceCall call, Auth request);
-  $async.Future<User> initRegister(ServiceCall call, Auth request);
+  $async.Future<AuthAnswer> initAuthorize(
+      ServiceCall call, AuthRequest request);
+  $async.Future<AuthAnswer> initRegister(ServiceCall call, AuthRequest request);
   $async.Future<WishList> getWishList(ServiceCall call, Token request);
   $async.Future<Family> getFamily(ServiceCall call, Token request);
   $async.Stream<WishListEvent> subscribeWishList(
