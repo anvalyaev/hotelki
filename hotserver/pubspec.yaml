@@ -1,0 +1,22 @@
+name: hotserver
+description: A sample command-line application.
+# version: 1.0.0
+# homepage: https://www.example.com
+# author: andre <email@example.com>
+
+environment:
+  sdk: '>=2.1.0 <3.0.0'
+
+#dependencies:
+#  path: ^1.4.1
+
+dependencies:
+  async: '>=1.13.3 <3.0.0'
+  grpc: ^1.0.0
+  protobuf: ^0.10.1
+  objectdb: ^1.0.5
+  uuid: ^1.0.3
+
+dev_dependencies:
+  test: ^1.0.0
+

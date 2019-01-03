@@ -1,0 +1,6 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.home.androidservices">
+    <application>
+        <service android:name=".HelloIntentService" />
+    </application>
+</manifest>

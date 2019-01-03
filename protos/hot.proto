@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option objc_class_prefix = "HTP";
+
+package hot;
+
+service Hot {
+    rpc initAuthorize(Auth) returns (User) {}
+    rpc initRegister(Auth) returns (User) {}
+    rpc getWishList(Token) returns (WishList) {}
+    rpc getFamily(Token) returns (Family) {}
+
+    rpc subscribeWishList(Token) returns (stream WishListEvent);
+    rpc subscribeFamily(Token) returns (stream WishFamilyEvent);
+
+    rpc changeWishList(WishListEvent) returns (Success);
+    rpc changeFamily(WishFamilyEvent) returns (Success);
+}
+
+
+message Success {
+    bool status = 1;
+    int32 err = 2;
+}
+
+message Auth {
+    string name = 1;
+    string password = 2;
+    int32 phone = 3;
+}
+
+message Token {
+    string id = 1;
+}
+
+message User {
+    Token user_id = 1;
+    Auth auth = 2;
+}
+
+message WishListEvent{
+    WishItem wishItem = 1;
+    int32 indexBefore = 2;
+    int32 indexAfter = 3;
+}
+
+message WishFamilyEvent{
+    User user = 1;
+    int32 indexBefore = 2;
+    int32 indexAfter = 3;
+}
+
+
+message Family {
+    string id = 1;
+    string name = 2;
+    repeated User users = 3;
+}
+
+message WishItem {
+    string id = 1;
+    string name = 2;
+}
+
+message WishList {
+    string id = 1;
+    string name = 2;
+    repeated WishItem wishItem = 3;
+}
+

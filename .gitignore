@@ -1,0 +1,6 @@
+*.name
+/.idea/
+/hotclient/build/
+*.packages
+*.flutter-plugins
+*.db

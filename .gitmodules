@@ -1,0 +1,3 @@
+[submodule "hotclient"]
+	path = hotclient
+	url = https://github.com/anvalyaev/hotelki.git
