@@ -7,5 +7,6 @@ abstract class Model{
   void modelChanged(){
     _controller.sink.add(this);
   }
+  void init(){}
   StreamController<Model> _controller;
 }

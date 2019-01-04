@@ -1,16 +1,15 @@
 import 'dart:collection';
 
 class Initializer {
-  void addStage(bool stage()){
+  void addStage(Function stage){
     _initializeQueue.add(stage);
   }
   bool initialize(){
     while(_initializeQueue.isNotEmpty){
-      print("before initialize");
-      if(!Function.apply(_initializeQueue.removeLast(), [])) return false;
-      print("after initialize");
+      Function stage = _initializeQueue.removeLast();
+      stage();
     }
     return true;
   }
-  Queue<Function> _initializeQueue;
+  Queue<Function> _initializeQueue = new Queue<Function>();
 }

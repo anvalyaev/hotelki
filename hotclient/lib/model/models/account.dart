@@ -13,7 +13,7 @@ AccountStatus get status;
 int get error;
 User get currentUser;
 void initRegister(String name, String password, String phone);  
-void initAuthorize(String name, String password, String phone);
+void initAuthorize(String login, String password);
 }
 class Account extends IAccount {
   Account(StreamController<Model> controller, this._network)
@@ -45,8 +45,8 @@ class Account extends IAccount {
     _status = AccountStatus.authorization;
     modelChanged();
   }
-  void initAuthorize(String name, String password, String phone) {
-      _network.sendRequest(InitAuthorize(name, password, phone, (dynamic data) {
+  void initAuthorize(String login, String password) {
+      _network.sendRequest(InitAuthorize(login, password, "", (dynamic data) {
       if (data is AuthAnswer) {
         AuthAnswer answer = data;
         if(answer.status){
