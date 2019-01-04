@@ -1,15 +1,19 @@
 import 'dart:async';
 import 'dart:collection';
 import 'package:grpc/grpc.dart';
-import '../model.dart';
-import '../../generated/hot.pb.dart';
-import '../../generated/hot.pbgrpc.dart';
-import '../../projectsettings.dart';
-import '../networkrequest.dart';
+import '../../model.dart';
+import '../../../generated/hot.pb.dart';
+import '../../../generated/hot.pbgrpc.dart';
+import '../../../projectsettings.dart';
+import 'networkrequests/networkrequest.dart';
 
 enum NetworkStatus { online, offline }
-
-class Network extends Model {
+abstract class INetwork extends Model{
+  INetwork(StreamController<Model> controller) : super(controller);
+  void sendRequest(NetworkRequest request);
+  NetworkStatus get status; 
+}
+class Network extends INetwork {
   Network(StreamController<Model> controller) : super(controller) {
     _channel = new ClientChannel(ProjectSettings.serverHost,
         port: ProjectSettings.serverPort,

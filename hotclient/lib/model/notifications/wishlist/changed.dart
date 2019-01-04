@@ -1,5 +1,5 @@
 import '../../notification.dart';
-import '../../wishlist.dart';
+import '../../models/wishlist.dart';
 import '../../model.dart';
 import '../../../interactor/index.dart';
 

@@ -1,4 +1,4 @@
-import 'model.dart';
+import '../model.dart';
 import 'dart:async';
 class WishItem {
 

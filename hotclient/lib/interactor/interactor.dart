@@ -3,18 +3,18 @@ import "dart:async";
 import 'package:gate/gate.dart';
 import 'dart:isolate';
 import 'initializer.dart';
-// import 'package:grpc/grpc.dart';
-import '../generated/hot.pb.dart';
-import '../generated/hot.pbgrpc.dart';
-
-
 
 class Interactor extends Worker {
   Interactor(SendPort sendPort) : super(sendPort);
 
-  Model.Network get network {
+  Model.INetwork get network {
     if (_network == null) _network = new Model.Network(_controller);
     return _network;
+  }
+
+  Model.IAccount get account {
+    if (_account == null) _account = new Model.Account(_controller, network);
+    return _account;
   }
 
   Model.WishList get wishListModel {
@@ -23,8 +23,9 @@ class Interactor extends Worker {
     return _wishListModel;
   }
 
+  Model.INetwork _network;
+  Model.IAccount _account;
   Model.WishList _wishListModel;
-  Model.Network _network;
 
   onNewMessage(dynamic data) {
     print("New message from controller: $data");
@@ -45,20 +46,6 @@ class Interactor extends Worker {
         }
       }
     });
-//     Auth auth = new Auth();
-//     auth.phone = 89890;
-//     auth.name = "Test Testovich";
-//     auth.password = "AnseArtur";
-
-//     Model.InitRegister request = new Model.InitRegister(auth, (dynamic data){
-//       print('Data: $data');
-//     });
-
-// new Timer.periodic(Duration(seconds: 2), (Timer){
-//   network.sendRequest(request);
-// });
-    
-
   }
 
   Initializer _initializer = new Initializer();

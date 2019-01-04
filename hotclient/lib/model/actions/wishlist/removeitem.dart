@@ -1,5 +1,5 @@
 import '../../action.dart';
-import '../../wishlist.dart';
+import '../../models/wishlist.dart';
 import '../../../interactor/index.dart';
 
 class RemoveItem extends Action{
