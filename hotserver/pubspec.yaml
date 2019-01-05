@@ -16,6 +16,7 @@ dependencies:
   protobuf: ^0.10.1
   objectdb: ^1.0.5
   uuid: ^1.0.3
+  fixnum: ^0.10.9
 
 dev_dependencies:
   test: ^1.0.0

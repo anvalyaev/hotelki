@@ -7,9 +7,7 @@ class Application extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'HotElki',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: ThemeData.fallback(),
         home: Widgets.Initial(),
         // initialRoute: '/Initial',
         routes: {

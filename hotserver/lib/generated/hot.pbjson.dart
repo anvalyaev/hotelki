@@ -7,34 +7,43 @@
 const Token$json = const {
   '1': 'Token',
   '2': const [
-    const {'1': 'token', '3': 1, '4': 1, '5': 9, '10': 'token'},
+    const {'1': 'usr_id', '3': 1, '4': 1, '5': 9, '10': 'usrId'},
   ],
 };
 
-const Success$json = const {
-  '1': 'Success',
+const AuthorizeRequest$json = const {
+  '1': 'AuthorizeRequest',
   '2': const [
-    const {'1': 'status', '3': 1, '4': 1, '5': 8, '10': 'status'},
-    const {'1': 'err', '3': 2, '4': 1, '5': 5, '10': 'err'},
+    const {'1': 'email', '3': 1, '4': 1, '5': 9, '10': 'email'},
+    const {'1': 'password', '3': 2, '4': 1, '5': 9, '10': 'password'},
   ],
 };
 
-const AuthRequest$json = const {
-  '1': 'AuthRequest',
+const AuthorizeAnswer$json = const {
+  '1': 'AuthorizeAnswer',
+  '2': const [
+    const {'1': 'err', '3': 1, '4': 1, '5': 5, '10': 'err'},
+    const {'1': 'user', '3': 2, '4': 1, '5': 11, '6': '.hot.User', '10': 'user'},
+  ],
+};
+
+const RegisterRequest$json = const {
+  '1': 'RegisterRequest',
   '2': const [
     const {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    const {'1': 'password', '3': 2, '4': 1, '5': 9, '10': 'password'},
+    const {'1': 'gender', '3': 2, '4': 1, '5': 9, '10': 'gender'},
     const {'1': 'phone', '3': 3, '4': 1, '5': 9, '10': 'phone'},
+    const {'1': 'email', '3': 4, '4': 1, '5': 9, '10': 'email'},
+    const {'1': 'birthdate', '3': 5, '4': 1, '5': 3, '10': 'birthdate'},
+    const {'1': 'password', '3': 6, '4': 1, '5': 9, '10': 'password'},
   ],
 };
 
-const AuthAnswer$json = const {
-  '1': 'AuthAnswer',
+const RegisterAnswer$json = const {
+  '1': 'RegisterAnswer',
   '2': const [
-    const {'1': 'token', '3': 1, '4': 1, '5': 9, '10': 'token'},
-    const {'1': 'status', '3': 2, '4': 1, '5': 8, '10': 'status'},
-    const {'1': 'err', '3': 3, '4': 1, '5': 5, '10': 'err'},
-    const {'1': 'user', '3': 4, '4': 1, '5': 11, '6': '.hot.User', '10': 'user'},
+    const {'1': 'err', '3': 1, '4': 1, '5': 5, '10': 'err'},
+    const {'1': 'user', '3': 2, '4': 1, '5': 11, '6': '.hot.User', '10': 'user'},
   ],
 };
 
@@ -43,8 +52,11 @@ const User$json = const {
   '2': const [
     const {'1': 'usr_id', '3': 1, '4': 1, '5': 9, '10': 'usrId'},
     const {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
-    const {'1': 'password', '3': 3, '4': 1, '5': 9, '10': 'password'},
+    const {'1': 'gender', '3': 3, '4': 1, '5': 9, '10': 'gender'},
     const {'1': 'phone', '3': 4, '4': 1, '5': 9, '10': 'phone'},
+    const {'1': 'email', '3': 5, '4': 1, '5': 9, '10': 'email'},
+    const {'1': 'birthdate', '3': 6, '4': 1, '5': 3, '10': 'birthdate'},
+    const {'1': 'password', '3': 7, '4': 1, '5': 9, '10': 'password'},
   ],
 };
 

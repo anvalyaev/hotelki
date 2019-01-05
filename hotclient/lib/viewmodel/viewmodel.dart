@@ -12,13 +12,32 @@ abstract class ViewModel<T> extends State {
     _controller.addAction(action);
   }
 
-  void subscribeToNotification(Models.Notification notification, void onNotify(Models.Notification notification)) {
-    bool isMyNotification(Models.Notification notification){
+  void subscribeToNotification(Models.Notification notification,
+      void onNotify(Models.Notification notification)) {
+    bool isMyNotification(Models.Notification notification) {
       return _myNotifications.contains(notification.id);
     }
+
     _myNotifications.add(notification.id);
-    _subscriptions.add(_controller.notificationStream.takeWhile(isMyNotification).listen(onNotify));
+    _subscriptions.add(_controller.notificationStream
+        .where(isMyNotification)
+        .listen(onNotify));
     _controller.addNotification(notification);
+  }
+
+  @override
+  void dispose() {
+    print("dispose $runtimeType");
+    for (StreamSubscription subscription in _subscriptions) {
+      subscription.cancel();
+    }
+    _subscriptions.clear();
+
+    for (int notificationId in _myNotifications) {
+      _controller.removeNotification(notificationId);
+    }
+    _myNotifications.clear();
+    super.dispose();
   }
 
   InteractorController _controller = new InteractorController();

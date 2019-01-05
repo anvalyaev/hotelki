@@ -11,7 +11,7 @@ class Interactor extends Worker {
     if (_network == null) {
       _network = new Model.Network(_controller);
       _activeModels.add(_network);
-      }
+    }
     return _network;
   }
 
@@ -19,20 +19,17 @@ class Interactor extends Worker {
     if (_account == null) {
       _account = new Model.Account(_controller, network);
       _activeModels.add(_account);
-      }
+    }
     return _account;
   }
 
   Model.WishList get wishListModel {
-    if (_wishListModel == null)
-      {
-        _wishListModel = new Model.WishList(_controller);
-        _activeModels.add(_wishListModel);
-      }
+    if (_wishListModel == null) {
+      _wishListModel = new Model.WishList(_controller);
+      _activeModels.add(_wishListModel);
+    }
     return _wishListModel;
   }
-
-
 
   onNewMessage(dynamic data) {
     print("New message from controller: $data");
@@ -42,6 +39,11 @@ class Interactor extends Worker {
     } else if (data is Model.Action) {
       Model.Action action = data;
       action.doAction(this);
+    } else if (data is int) {
+      int notificationId = data;
+      _notifications.removeWhere((item) {
+        return item.id == notificationId;
+      });
     }
   }
 
@@ -51,10 +53,10 @@ class Interactor extends Worker {
         _testNotification(notification, model);
       }
     });
-    _initializer.addStage((){
+    _initializer.addStage(() {
       network.init();
     });
-    _initializer.addStage((){
+    _initializer.addStage(() {
       account.init();
     });
     _initializer.initialize();
@@ -67,13 +69,12 @@ class Interactor extends Worker {
     }
   }
 
-    void _testNotificationOnActiveModels(Model.Notification notification) {
-      if(_activeModels.isEmpty) return;
-      for(Model.Model model in _activeModels){
-        _testNotification(notification, model);
-      }
+  void _testNotificationOnActiveModels(Model.Notification notification) {
+    if (_activeModels.isEmpty) return;
+    for (Model.Model model in _activeModels) {
+      _testNotification(notification, model);
+    }
   }
-
 
   Model.INetwork _network;
   Model.IAccount _account;

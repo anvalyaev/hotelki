@@ -12,7 +12,7 @@ abstract class IAccount extends Model  {
 AccountStatus get status;
 int get error;
 User get currentUser;
-void initRegister(String name, String password, String phone);  
+void initRegister(String email, String password, Map<String, String> params);  
 void initAuthorize(String login, String password);
 }
 class Account extends IAccount {
@@ -22,11 +22,11 @@ class Account extends IAccount {
   AccountStatus get status => _status;
   int get error => _error;
   User get currentUser => _currentUser;
-  void initRegister(String name, String password, String phone) {
-    _network.sendRequest(InitRegister(name, password, phone, (dynamic data) {
-      if (data is AuthAnswer) {
-        AuthAnswer answer = data;
-        if(answer.status){
+  void initRegister(String email, String password, Map<String, String> params) {
+    _network.sendRequest(InitRegister(email, password, (dynamic data) {
+      if (data is RegisterAnswer) {
+        RegisterAnswer answer = data;
+        if(answer.err == 0){
           _currentUser = answer.user;
           _error = 0;
           _status = AccountStatus.authorized;
@@ -45,13 +45,13 @@ class Account extends IAccount {
     _status = AccountStatus.authorization;
     modelChanged();
   }
-  void initAuthorize(String login, String password) {
-      _network.sendRequest(InitAuthorize(login, password, "", (dynamic data) {
-      if (data is AuthAnswer) {
-        AuthAnswer answer = data;
-        if(answer.status){
+  void initAuthorize(String email, String password) {
+      _network.sendRequest(InitAuthorize(email, password, (dynamic data) {
+      if (data is AuthorizeAnswer) {
+        AuthorizeAnswer answer = data;
+        if(answer.err == 0){
           _currentUser = answer.user;
-          _error = 0;
+          _error = answer.err;
           _status = AccountStatus.authorized;
           modelChanged();
           return;

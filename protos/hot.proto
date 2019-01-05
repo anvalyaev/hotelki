@@ -6,46 +6,56 @@ option objc_class_prefix = "HTP";
 package hot;
 
 service Hot {
-    rpc initAuthorize(AuthRequest) returns (AuthAnswer) {}
-    rpc initRegister(AuthRequest) returns (AuthAnswer) {}
-    rpc getWishList(Token) returns (WishList) {}
-    rpc getFamily(Token) returns (Family) {}
+    rpc initAuthorize(AuthorizeRequest) returns (AuthorizeAnswer) {}
+    rpc initRegister(RegisterRequest) returns (RegisterAnswer) {}
+    // rpc getWishList(Token) returns (WishList) {}
+    // rpc getFamily(Token) returns (Family) {}
 
-    rpc subscribeWishList(Token) returns (stream WishListEvent);
-    rpc subscribeFamily(Token) returns (stream WishFamilyEvent);
+    // rpc subscribeWishList(Token) returns (stream WishListEvent);
+    // rpc subscribeFamily(Token) returns (stream WishFamilyEvent);
 
-    rpc changeWishList(WishListEvent) returns (Success);
-    rpc changeFamily(WishFamilyEvent) returns (Success);
+    // rpc changeWishList(WishListEvent) returns (Success);
+    // rpc changeFamily(WishFamilyEvent) returns (Success);
 }
 
 
 message Token {
-    string token = 1;
+    string usr_id = 1;
 }
 
-message Success {
-    bool status = 1;
-    int32 err = 2;
-}
-
-message AuthRequest {
-    string name = 1;
+message AuthorizeRequest {
+    string email = 1;
     string password = 2;
-    string phone = 3;
 }
 
-message AuthAnswer {
-    string token = 1;
-    bool status = 2;
-    int32 err = 3;
-    User user = 4; 
+message AuthorizeAnswer {
+    int32 err = 1;
+    User user = 2; 
+}
+
+message RegisterRequest {
+    string name = 1;
+    string gender = 2;
+    string phone = 3;
+    string email = 4;
+    int64 birthdate = 5;
+    string password = 6;
+}
+
+
+message RegisterAnswer {
+    int32 err = 1;
+    User user = 2; 
 }
 
 message User {
     string usr_id = 1;
     string name = 2;
-    string password = 3;
+    string gender = 3;
     string phone = 4;
+    string email = 5;
+    int64 birthdate = 6;
+    string password = 7;
 }
 
 message WishListEvent{

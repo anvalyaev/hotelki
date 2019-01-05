@@ -4,3 +4,6 @@
 *.packages
 *.flutter-plugins
 *.db
+/hotclient/android/.gradle/
+/hotclient/feather/
+/hotclient/gen/

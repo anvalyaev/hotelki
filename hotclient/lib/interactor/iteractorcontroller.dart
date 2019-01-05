@@ -13,6 +13,10 @@ class InteractorController extends Controller {
     else
       _notificationsBuffer.add(notification);
   }
+  void removeNotification(int notificationId) {
+    if (state == ControllerState.initialized)
+      send(notificationId);
+  }
 
   void addAction(Action action) {
     if (state == ControllerState.initialized)
@@ -30,6 +34,9 @@ class InteractorController extends Controller {
   void onNewMessage(dynamic data) {
     print("New message from interactor: $data");
     if (data is Notification) {
+      Notification notification = data;
+      int id = notification.id;
+      print("Notification id: $id");
       _controller.sink.add(data);
     }
   }

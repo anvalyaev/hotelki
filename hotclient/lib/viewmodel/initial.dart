@@ -12,20 +12,8 @@ abstract class Initial extends ViewModel<Widget.Initial> {
       AccountkStatusNotifier accountStatusNotifier = notification;
       setState(() {
         status = accountStatusNotifier.data;
-        switch (status) {
-          case Models.AccountStatus.not_authorized:
-            Navigator.pushNamed(context, '/Authorization');
-            break;
-          case Models.AccountStatus.authorization:
-            Navigator.pushNamed(context, '/Initial');
-            break;
-          case Models.AccountStatus.authorized:
-            Navigator.pushNamed(context, '/Main');
-            break;
-          default:
-            Navigator.pushNamed(context, '/Initial');
-            break;
-        }
+        if(status == Models.AccountStatus.not_authorized) Navigator.of(context).pushNamedAndRemoveUntil('/Authorization', (Route<dynamic> route) => false);
+        else if(status == Models.AccountStatus.authorized) Navigator.of(context).pushNamedAndRemoveUntil('/Main', (Route<dynamic> route) => false);
       });
     });
   }
