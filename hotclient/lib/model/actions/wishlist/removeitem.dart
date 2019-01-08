@@ -1,18 +1,19 @@
 import '../../action.dart';
 import '../../models/wishlist.dart';
 import '../../../interactor/index.dart';
+import '../../../generated/hot.pbgrpc.dart';
 
 class RemoveItem extends Action{
-  RemoveItem(int id){
-    _id = id;
+  RemoveItem(int index){
+    _index = index;
   }
   void doAction(Interactor interactor){
-    List<WishItem> itemsToRemove = interactor.wishListModel.items.where((WishItem item){
-      return item.id == _id;
-    });
-    for(WishItem item in itemsToRemove){
-      interactor.wishListModel.removeItem(item);
-    }
+    WishItem item = new WishItem();
+    item.title = '';
+    item.description = '';
+
+    Remove removeOperation = new Remove(_index);
+    interactor.wishListModel.changeItem(item, removeOperation);
   }
-  int _id;
+  int _index;
 }

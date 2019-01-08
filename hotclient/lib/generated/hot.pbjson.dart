@@ -11,6 +11,10 @@ const Token$json = const {
   ],
 };
 
+const Empty$json = const {
+  '1': 'Empty',
+};
+
 const AuthorizeRequest$json = const {
   '1': 'AuthorizeRequest',
   '2': const [
@@ -64,10 +68,9 @@ const WishListEvent$json = const {
   '1': 'WishListEvent',
   '2': const [
     const {'1': 'token', '3': 1, '4': 1, '5': 9, '10': 'token'},
-    const {'1': 'wi_id', '3': 2, '4': 1, '5': 9, '10': 'wiId'},
-    const {'1': 'wl_id', '3': 3, '4': 1, '5': 9, '10': 'wlId'},
-    const {'1': 'indexBefore', '3': 4, '4': 1, '5': 5, '10': 'indexBefore'},
-    const {'1': 'indexAfter', '3': 5, '4': 1, '5': 5, '10': 'indexAfter'},
+    const {'1': 'indexBefore', '3': 2, '4': 1, '5': 5, '10': 'indexBefore'},
+    const {'1': 'indexAfter', '3': 3, '4': 1, '5': 5, '10': 'indexAfter'},
+    const {'1': 'wishItem', '3': 4, '4': 1, '5': 11, '6': '.hot.WishItem', '10': 'wishItem'},
   ],
 };
 
@@ -95,7 +98,8 @@ const WishItem$json = const {
   '1': 'WishItem',
   '2': const [
     const {'1': 'wi_id', '3': 1, '4': 1, '5': 9, '10': 'wiId'},
-    const {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'title', '3': 2, '4': 1, '5': 9, '10': 'title'},
+    const {'1': 'description', '3': 3, '4': 1, '5': 9, '10': 'description'},
   ],
 };
 

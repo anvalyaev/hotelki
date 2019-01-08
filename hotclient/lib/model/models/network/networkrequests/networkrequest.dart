@@ -11,3 +11,11 @@ dynamic send(HotClient client);
 
 Function _callback;
 }
+
+abstract class NetworkStream extends NetworkRequest{
+NetworkStream(void callback(dynamic)) : super(callback);
+void listen(HotClient client);
+@override
+dynamic send(HotClient client){
+}
+}

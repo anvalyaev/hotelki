@@ -4,7 +4,9 @@ import '../widget/wishlist.dart' as Widget;
 import '../model/index.dart' as Models;
 import '../model/actions/wishlist/additem.dart' as Action;
 import '../model/actions/wishlist/removeitem.dart' as Action;
+import '../model/actions/wishlist/updatewishlist.dart' as Action;
 import '../model/notifications/wishlist/changed.dart';
+import '../generated/hot.pbgrpc.dart';
 
 abstract class WishList extends ViewModel<Widget.WishList> {
   WishList() {
@@ -14,12 +16,13 @@ abstract class WishList extends ViewModel<Widget.WishList> {
         wishList = changed.data;
       });
     });
+    executeAction(new Action.UpdateWishList());
   }
 
-  void addWishListItem(String name) => executeAction(new Action.AddItem(name));
   void removeWishListItem(int index) =>
-      executeAction(new Action.RemoveItem(wishList.elementAt(index).id));
-  List<Models.WishItem> wishList = [];
+      executeAction(new Action.RemoveItem(index));
+      
+  List<WishItem> wishList = new List<WishItem>();
 
   set selectedItemIndex(int val) {
     setState(() {

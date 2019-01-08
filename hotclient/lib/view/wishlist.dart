@@ -8,7 +8,7 @@ class WishList extends ViewModel.WishList {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      itemCount: 5,
+      itemCount: wishList.length,
       separatorBuilder: (BuildContext context, int index) {
         return Container(
           height: 0,
@@ -18,8 +18,8 @@ class WishList extends ViewModel.WishList {
         return Card(
             child: ListTile(
           leading: Icon(Icons.image),
-          title: Text("My wish"),
-          subtitle: Text("Bla bla blabla bla... Bla bla bla, bla bla"),
+          title: Text(wishList.elementAt(index).title),
+          subtitle: Text(wishList.elementAt(index).description),
           selected: index == selectedItemIndex,
           onTap: () {
             selectedItemIndex = index;

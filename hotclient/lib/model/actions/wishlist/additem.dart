@@ -1,18 +1,21 @@
 import '../../action.dart';
 import '../../models/wishlist.dart';
 import '../../../interactor/index.dart';
+import '../../../generated/hot.pbgrpc.dart';
 
 class AddItem extends Action{
-  AddItem(String title){
+  AddItem(String title, String description){
     _title = title;
+    _description = description;
   }
   void doAction(Interactor interactor){
-    // for(int i = 0; i < 1000000000; i++){
-    //   // WishItem item = new WishItem(_title);
-    //   // interactor.wishListModel.addItem(item);
-    //   // interactor.wishListModel.removeItem(item);
-    // }
-    interactor.wishListModel.addItem(new WishItem(_title));
+    WishItem item = new WishItem();
+    item.title = _title;
+    item.description = _description;
+
+    Insert insertOperation = new Insert(interactor.wishListModel.items.length);
+    interactor.wishListModel.changeItem(item, insertOperation);
   }
   String _title;
+  String _description;
 }

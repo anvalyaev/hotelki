@@ -9,6 +9,15 @@ class EditWish extends ViewModel.EditWish {
     return Scaffold(
         appBar: AppBar(
           title: Text("New Wish"),
+          leading: IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  Map<String, dynamic> data = new Map<String, dynamic>();
+                  data['title'] = title;
+                  data['description'] = description;
+                  Navigator.pop(context, data);
+                },
+              ),
         ),
         body: Padding(
           padding: EdgeInsets.all(24),
@@ -16,8 +25,10 @@ class EditWish extends ViewModel.EditWish {
           TextFormField(
             decoration: InputDecoration(
               labelText: "Title",
+              
             ),
             maxLines: 1,
+            controller: titleController,
           ),
           SizedBox(
             height: 12
@@ -28,6 +39,7 @@ class EditWish extends ViewModel.EditWish {
               hintText: "Description",
             ),
             maxLines: 100,
+            controller: descriptionController,
           ),
           )
         ])));

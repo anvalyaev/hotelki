@@ -8,11 +8,13 @@ import '../../../projectsettings.dart';
 import 'networkrequests/networkrequest.dart';
 
 enum NetworkStatus { online, offline }
-abstract class INetwork extends Model{
+
+abstract class INetwork extends Model {
   INetwork(StreamController<Model> controller) : super(controller);
   void sendRequest(NetworkRequest request);
-  NetworkStatus get status; 
+  NetworkStatus get status;
 }
+
 class Network extends INetwork {
   Network(StreamController<Model> controller) : super(controller) {
     _channel = new ClientChannel(ProjectSettings.serverHost,
@@ -37,12 +39,17 @@ class Network extends INetwork {
   }
 
   void _handleRequests() async {
-    int count =_requests.length;
+    int count = _requests.length;
     print("Try handle request: $count");
     if (_requests.isEmpty) return;
     try {
-      dynamic val = await _requests.last.send(_client);
-      _requests.last.callback(val);
+      if (_requests.last is NetworkStream) {
+        NetworkStream nstream = _requests.last;
+        nstream.listen(_client);
+      } else {
+        dynamic val = await _requests.last.send(_client);
+        _requests.last.callback(val);
+      }
       _requests.removeLast();
       _status = NetworkStatus.online;
       if (_updateTimer != null) {

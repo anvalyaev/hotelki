@@ -14,7 +14,7 @@ class Main extends ViewModel.Main {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
-          onPressed: () {Navigator.pushNamed(context, '/EditWish');},
+          onPressed: () {showEditWish(context);},
         ),
         bottomNavigationBar: BottomAppBar(
           shape: CircularNotchedRectangle(),

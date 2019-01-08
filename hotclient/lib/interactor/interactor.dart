@@ -25,7 +25,7 @@ class Interactor extends Worker {
 
   Model.WishList get wishListModel {
     if (_wishListModel == null) {
-      _wishListModel = new Model.WishList(_controller);
+      _wishListModel = new Model.WishList(_controller, network, account);
       _activeModels.add(_wishListModel);
     }
     return _wishListModel;

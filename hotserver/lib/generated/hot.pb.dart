@@ -36,6 +36,26 @@ class Token extends $pb.GeneratedMessage {
   void clearUsrId() => clearField(1);
 }
 
+class Empty extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Empty', package: const $pb.PackageName('hot'))
+    ..hasRequiredFields = false
+  ;
+
+  Empty() : super();
+  Empty.fromBuffer(List<int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+  Empty.fromJson(String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+  Empty clone() => new Empty()..mergeFromMessage(this);
+  Empty copyWith(void Function(Empty) updates) => super.copyWith((message) => updates(message as Empty));
+  $pb.BuilderInfo get info_ => _i;
+  static Empty create() => new Empty();
+  static $pb.PbList<Empty> createRepeated() => new $pb.PbList<Empty>();
+  static Empty getDefault() => _defaultInstance ??= create()..freeze();
+  static Empty _defaultInstance;
+  static void $checkItem(Empty v) {
+    if (v is! Empty) $pb.checkItemFailed(v, _i.qualifiedMessageName);
+  }
+}
+
 class AuthorizeRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('AuthorizeRequest', package: const $pb.PackageName('hot'))
     ..aOS(1, 'email')
@@ -253,10 +273,9 @@ class User extends $pb.GeneratedMessage {
 class WishListEvent extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('WishListEvent', package: const $pb.PackageName('hot'))
     ..aOS(1, 'token')
-    ..aOS(2, 'wiId')
-    ..aOS(3, 'wlId')
-    ..a<int>(4, 'indexBefore', $pb.PbFieldType.O3)
-    ..a<int>(5, 'indexAfter', $pb.PbFieldType.O3)
+    ..a<int>(2, 'indexBefore', $pb.PbFieldType.O3)
+    ..a<int>(3, 'indexAfter', $pb.PbFieldType.O3)
+    ..a<WishItem>(4, 'wishItem', $pb.PbFieldType.OM, WishItem.getDefault, WishItem.create)
     ..hasRequiredFields = false
   ;
 
@@ -279,25 +298,20 @@ class WishListEvent extends $pb.GeneratedMessage {
   bool hasToken() => $_has(0);
   void clearToken() => clearField(1);
 
-  String get wiId => $_getS(1, '');
-  set wiId(String v) { $_setString(1, v); }
-  bool hasWiId() => $_has(1);
-  void clearWiId() => clearField(2);
+  int get indexBefore => $_get(1, 0);
+  set indexBefore(int v) { $_setSignedInt32(1, v); }
+  bool hasIndexBefore() => $_has(1);
+  void clearIndexBefore() => clearField(2);
 
-  String get wlId => $_getS(2, '');
-  set wlId(String v) { $_setString(2, v); }
-  bool hasWlId() => $_has(2);
-  void clearWlId() => clearField(3);
+  int get indexAfter => $_get(2, 0);
+  set indexAfter(int v) { $_setSignedInt32(2, v); }
+  bool hasIndexAfter() => $_has(2);
+  void clearIndexAfter() => clearField(3);
 
-  int get indexBefore => $_get(3, 0);
-  set indexBefore(int v) { $_setSignedInt32(3, v); }
-  bool hasIndexBefore() => $_has(3);
-  void clearIndexBefore() => clearField(4);
-
-  int get indexAfter => $_get(4, 0);
-  set indexAfter(int v) { $_setSignedInt32(4, v); }
-  bool hasIndexAfter() => $_has(4);
-  void clearIndexAfter() => clearField(5);
+  WishItem get wishItem => $_getN(3);
+  set wishItem(WishItem v) { setField(4, v); }
+  bool hasWishItem() => $_has(3);
+  void clearWishItem() => clearField(4);
 }
 
 class WishFamilyEvent extends $pb.GeneratedMessage {
@@ -388,7 +402,8 @@ class Family extends $pb.GeneratedMessage {
 class WishItem extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('WishItem', package: const $pb.PackageName('hot'))
     ..aOS(1, 'wiId')
-    ..aOS(2, 'name')
+    ..aOS(2, 'title')
+    ..aOS(3, 'description')
     ..hasRequiredFields = false
   ;
 
@@ -411,10 +426,15 @@ class WishItem extends $pb.GeneratedMessage {
   bool hasWiId() => $_has(0);
   void clearWiId() => clearField(1);
 
-  String get name => $_getS(1, '');
-  set name(String v) { $_setString(1, v); }
-  bool hasName() => $_has(1);
-  void clearName() => clearField(2);
+  String get title => $_getS(1, '');
+  set title(String v) { $_setString(1, v); }
+  bool hasTitle() => $_has(1);
+  void clearTitle() => clearField(2);
+
+  String get description => $_getS(2, '');
+  set description(String v) { $_setString(2, v); }
+  bool hasDescription() => $_has(2);
+  void clearDescription() => clearField(3);
 }
 
 class WishList extends $pb.GeneratedMessage {
