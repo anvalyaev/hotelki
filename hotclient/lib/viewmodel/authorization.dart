@@ -17,7 +17,8 @@ abstract class Authorization extends ViewModel<Widget.Authorization> {
         (Models.Notification notification) {
       Models.AccountStatus status = notification.data;
       if (Models.AccountStatus.authorized == status) {
-        Navigator.of(context).pushNamedAndRemoveUntil('/Main', (Route<dynamic> route) => false);
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/Main', (Route<dynamic> route) => false);
       }
       if (status == Models.AccountStatus.authorization) {
         setState(() {
@@ -47,4 +48,6 @@ abstract class Authorization extends ViewModel<Widget.Authorization> {
   String password = "";
   TextEditingController loginController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
+  final FocusNode loginFocus = FocusNode();
+  final FocusNode passwordFocus = FocusNode();
 }

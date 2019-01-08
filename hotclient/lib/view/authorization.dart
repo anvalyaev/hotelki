@@ -25,26 +25,31 @@ class Authorization extends ViewModel.Authorization {
         // crossAxisAlignment: CrossAxisAlignment.,
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
-          Expanded(
-            child: FittedBox(
-              fit: BoxFit.fitWidth,
-              child: Icon(
-                Icons.account_circle,
-                // size: 200,
-                color: Theme.of(context).accentColor,
-              ),
-            ),
-          ),
+          AnimatedContainer(
+              duration: const Duration(milliseconds: 120),
+              child: Expanded(
+                child: FittedBox(
+                fit: BoxFit.fitWidth,
+                child: Icon(
+                  Icons.account_circle,
+                  // size: 200,
+                  color: Theme.of(context).accentColor,
+                ),
+              ))),
           // Spacer(),
           TextFormField(
-            controller: loginController,
-            decoration: const InputDecoration(
-                border: OutlineInputBorder(), labelText: "Login"),
-            maxLines: 1,
-            onSaved: (String value) {
-              login = value;
-            },
-          ),
+              controller: loginController,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(), labelText: "Login"),
+              maxLines: 1,
+              onSaved: (String value) {
+                login = value;
+              },
+              focusNode: loginFocus,
+              onFieldSubmitted: (term) {
+                loginFocus.unfocus();
+                FocusScope.of(context).requestFocus(passwordFocus);
+              }),
           SizedBox(height: 12.0),
           TextFormField(
             controller: passwordController,
@@ -63,6 +68,11 @@ class Authorization extends ViewModel.Authorization {
             maxLines: 1,
             onSaved: (String value) {
               password = value;
+            },
+            focusNode: passwordFocus,
+            onFieldSubmitted: (term) {
+              passwordFocus.unfocus();
+              initAuthorization();
             },
           ),
           SizedBox(height: 12.0),
