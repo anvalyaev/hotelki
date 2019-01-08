@@ -4,8 +4,8 @@ import '../model/index.dart' as Models;
 // import '../model/notifications/account/accountstatusnotifier.dart';
 // import 'package:flutter/material.dart';
 
-abstract class Main extends ViewModel<Widget.Main> {
-  Main() {
+abstract class EditWish extends ViewModel<Widget.EditWish> {
+  EditWish() {
     //   subscribeToNotification(new AccountkStatusNotifier(), (Models.Notification notification) {
     //   AccountkStatusNotifier accountStatusNotifier = notification;
     //   setState(() {

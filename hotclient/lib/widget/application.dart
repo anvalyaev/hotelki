@@ -15,6 +15,7 @@ class Application extends StatelessWidget {
           '/Main': (BuildContext context) => Widgets.Main(),
           '/UserCreation': (BuildContext context) => Widgets.UserCreation(),
           '/Initial': (BuildContext context) => Widgets.Initial(),
+          '/EditWish': (BuildContext context) => Widgets.EditWish(),
         });
   }
 }
