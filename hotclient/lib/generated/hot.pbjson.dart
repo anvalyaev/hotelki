@@ -67,10 +67,19 @@ const User$json = const {
 const WishListEvent$json = const {
   '1': 'WishListEvent',
   '2': const [
-    const {'1': 'token', '3': 1, '4': 1, '5': 9, '10': 'token'},
-    const {'1': 'indexBefore', '3': 2, '4': 1, '5': 5, '10': 'indexBefore'},
-    const {'1': 'indexAfter', '3': 3, '4': 1, '5': 5, '10': 'indexAfter'},
-    const {'1': 'wishItem', '3': 4, '4': 1, '5': 11, '6': '.hot.WishItem', '10': 'wishItem'},
+    const {'1': 'action', '3': 1, '4': 1, '5': 14, '6': '.hot.WishListEvent.Action', '10': 'action'},
+    const {'1': 'token', '3': 2, '4': 1, '5': 9, '10': 'token'},
+    const {'1': 'wishItem', '3': 3, '4': 1, '5': 11, '6': '.hot.WishItem', '10': 'wishItem'},
+  ],
+  '4': const [WishListEvent_Action$json],
+};
+
+const WishListEvent_Action$json = const {
+  '1': 'Action',
+  '2': const [
+    const {'1': 'ADD', '2': 0},
+    const {'1': 'REMOVE', '2': 1},
+    const {'1': 'UPDATE', '2': 2},
   ],
 };
 

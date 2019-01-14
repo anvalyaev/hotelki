@@ -11,7 +11,7 @@ final ObjectDB usersDb = new ObjectDB('../users.db');
 final ObjectDB familyDb = new ObjectDB('../familys.db');
 final ObjectDB wishListDb = new ObjectDB('../wish_list.db');
 
-enum Operation { unknown, insert, remove, move, update }
+// enum Operation { unknown, insert, remove, move, update }
 
 class HotService extends HotServiceBase {
   final Uuid uuid = new Uuid();
@@ -110,25 +110,13 @@ class HotService extends HotServiceBase {
     res.wlId = 'no_id';
     res.name = "no_name";
 
-    Map<String, dynamic> findMap = new Map<String, dynamic>();
-    findMap['token'] = request.usrId;
-
-    List<Map> result = await wishListDb.find(findMap);
-
-    Map<String, dynamic> usrWishList;
-    if (result.isEmpty) {
-      usrWishList = new Map<String, dynamic>();
-      usrWishList["token"] = request.usrId;
-      usrWishList["wish_list"] = new List<Map<String, dynamic>>();
-    } else
-      usrWishList = result.elementAt(0);
-    
-    List<dynamic> wishList = usrWishList["wish_list"];
+    List<Map<dynamic, dynamic>> wishList = await wishListDb.find({'token': request.usrId});
 
     for(Map<String, dynamic> wishItem in wishList){
       WishItem item = new WishItem();
       item.title = wishItem['title'];
       item.description = wishItem['description'];
+      item.wiId = wishItem['_id'];
       res.wishItem.add(item);
     }
     return res;
@@ -157,63 +145,26 @@ class HotService extends HotServiceBase {
   Future<Empty> changeWishList(
       grpc.ServiceCall call, WishListEvent request) async {
     print("changeWishList $request");
-    Operation operation = Operation.unknown;
-    if (request.indexBefore < 0 && request.indexAfter < 0)
-      operation = Operation.update;
-    else if (request.indexBefore < 0 && request.indexAfter >= 0)
-      operation = Operation.insert;
-    else if (request.indexBefore >= 0 && request.indexAfter < 0)
-      operation = Operation.remove;
-    else if (request.indexBefore >= 0 && request.indexAfter >= 0)
-      operation = Operation.move;
 
-    Map<String, dynamic> findMap = new Map<String, dynamic>();
-    findMap['token'] = request.token;
-
-    List<Map> result = await wishListDb.find(findMap);
-
-    Map<String, dynamic> usrWishList;
-    if (result.isEmpty) {
-      usrWishList = new Map<String, dynamic>();
-      usrWishList["token"] = request.token;
-      usrWishList["wish_list"] = new List<Map<String, dynamic>>();
-      wishListDb.insert(usrWishList);
-    } else
-      usrWishList = result.elementAt(0);
-
-    Map<String, dynamic> wishItem = new Map<String, dynamic>();
-    wishItem["title"] = request.wishItem.title;
-    wishItem["description"] = request.wishItem.description;
-
-    List<dynamic> wishList = usrWishList["wish_list"];
-    switch (operation) {
-      case Operation.unknown:
-        print('Unknown wish list operation...');
+    switch (request.action) {
+      case WishListEvent_Action.ADD:
+        print('Add wish list operation...');
+        Map<String, dynamic> wishItem;
+        wishItem = new Map<String, dynamic>();
+        wishItem["token"] = request.token;
+        wishItem["title"] = request.wishItem.title;
+        wishItem["description"] = request.wishItem.description;
+        wishListDb.insert(wishItem);
         break;
-      case Operation.insert:
-        print('Insert wish list operation...');
-        if(request.indexAfter > wishList.length) return new Empty();
-        wishList.insert(request.indexAfter, wishItem);
-        usrWishList["wish_list"] = wishList;
-        wishListDb.update({'token': request.token}, usrWishList);
-        break;
-      case Operation.remove:
+      case WishListEvent_Action.REMOVE:
         print('Remove wish list operation...');
-        if(request.indexBefore > wishList.length - 1) return new Empty();
-        wishList.removeAt(request.indexBefore);
+        wishListDb.remove({'token': request.token, '_id': request.wishItem.wiId});
         break;
-      case Operation.move:
-        print('Move wish list operation...');
-        // if(request.indexBefore > wishList.length - 1) return new Empty();
-        // if(request.indexAfter > wishList.length - 1) return new Empty();
-        // wishList.;
-        break;
-      case Operation.update:
+      case WishListEvent_Action.UPDATE:
         print('Update wish list operation...');
-        // wishList.elementAt(index)
+        wishListDb.update({'token': request.token, '_id': request.wishItem.wiId}, {'title': request.wishItem.title, 'description': request.wishItem.title});
         break;
     }
-
 
     _controllerWishListEvent.sink.add(request);
     return new Empty();

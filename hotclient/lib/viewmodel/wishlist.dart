@@ -19,8 +19,8 @@ abstract class WishList extends ViewModel<Widget.WishList> {
     executeAction(new Action.UpdateWishList());
   }
 
-  void removeWishListItem(int index) =>
-      executeAction(new Action.RemoveItem(index));
+  void removeWishListItem(String id) =>
+      executeAction(new Action.RemoveItem(id));
       
   List<WishItem> wishList = new List<WishItem>();
 

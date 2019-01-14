@@ -4,16 +4,16 @@ import '../../../interactor/index.dart';
 import '../../../generated/hot.pbgrpc.dart';
 
 class RemoveItem extends Action{
-  RemoveItem(int index){
-    _index = index;
+  RemoveItem(String id){
+    _id = id;
   }
   void doAction(Interactor interactor){
     WishItem item = new WishItem();
     item.title = '';
     item.description = '';
+    item.wiId = _id;
 
-    Remove removeOperation = new Remove(_index);
-    interactor.wishListModel.changeItem(item, removeOperation);
+    interactor.wishListModel.changeItem(item, Operation.remove);
   }
-  int _index;
+  String _id;
 }

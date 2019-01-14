@@ -12,9 +12,9 @@ class AddItem extends Action{
     WishItem item = new WishItem();
     item.title = _title;
     item.description = _description;
+    item.wiId = '';
 
-    Insert insertOperation = new Insert(interactor.wishListModel.items.length);
-    interactor.wishListModel.changeItem(item, insertOperation);
+    interactor.wishListModel.changeItem(item, Operation.add);
   }
   String _title;
   String _description;

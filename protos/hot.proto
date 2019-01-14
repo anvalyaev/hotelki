@@ -61,10 +61,14 @@ message User {
 }
 
 message WishListEvent{
-    string token = 1;
-    int32 indexBefore = 2;
-    int32 indexAfter = 3;
-    WishItem wishItem = 4;
+    enum Action{
+        ADD = 0;
+        REMOVE = 1;
+        UPDATE = 2;
+    }
+    Action action =  1;
+    string token = 2;
+    WishItem wishItem = 3;
 }
 
 message WishFamilyEvent{
@@ -93,4 +97,6 @@ message WishList {
     string name = 2;
     repeated WishItem wishItem = 3;
 }
+
+
 

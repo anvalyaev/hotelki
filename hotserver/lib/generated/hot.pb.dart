@@ -10,6 +10,10 @@ import 'dart:core' show int, bool, double, String, List, Map, override;
 import 'package:fixnum/fixnum.dart';
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'hot.pbenum.dart';
+
+export 'hot.pbenum.dart';
+
 class Token extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('Token', package: const $pb.PackageName('hot'))
     ..aOS(1, 'usrId')
@@ -23,6 +27,7 @@ class Token extends $pb.GeneratedMessage {
   Token copyWith(void Function(Token) updates) => super.copyWith((message) => updates(message as Token));
   $pb.BuilderInfo get info_ => _i;
   static Token create() => new Token();
+  Token createEmptyInstance() => create();
   static $pb.PbList<Token> createRepeated() => new $pb.PbList<Token>();
   static Token getDefault() => _defaultInstance ??= create()..freeze();
   static Token _defaultInstance;
@@ -48,6 +53,7 @@ class Empty extends $pb.GeneratedMessage {
   Empty copyWith(void Function(Empty) updates) => super.copyWith((message) => updates(message as Empty));
   $pb.BuilderInfo get info_ => _i;
   static Empty create() => new Empty();
+  Empty createEmptyInstance() => create();
   static $pb.PbList<Empty> createRepeated() => new $pb.PbList<Empty>();
   static Empty getDefault() => _defaultInstance ??= create()..freeze();
   static Empty _defaultInstance;
@@ -70,6 +76,7 @@ class AuthorizeRequest extends $pb.GeneratedMessage {
   AuthorizeRequest copyWith(void Function(AuthorizeRequest) updates) => super.copyWith((message) => updates(message as AuthorizeRequest));
   $pb.BuilderInfo get info_ => _i;
   static AuthorizeRequest create() => new AuthorizeRequest();
+  AuthorizeRequest createEmptyInstance() => create();
   static $pb.PbList<AuthorizeRequest> createRepeated() => new $pb.PbList<AuthorizeRequest>();
   static AuthorizeRequest getDefault() => _defaultInstance ??= create()..freeze();
   static AuthorizeRequest _defaultInstance;
@@ -102,6 +109,7 @@ class AuthorizeAnswer extends $pb.GeneratedMessage {
   AuthorizeAnswer copyWith(void Function(AuthorizeAnswer) updates) => super.copyWith((message) => updates(message as AuthorizeAnswer));
   $pb.BuilderInfo get info_ => _i;
   static AuthorizeAnswer create() => new AuthorizeAnswer();
+  AuthorizeAnswer createEmptyInstance() => create();
   static $pb.PbList<AuthorizeAnswer> createRepeated() => new $pb.PbList<AuthorizeAnswer>();
   static AuthorizeAnswer getDefault() => _defaultInstance ??= create()..freeze();
   static AuthorizeAnswer _defaultInstance;
@@ -138,6 +146,7 @@ class RegisterRequest extends $pb.GeneratedMessage {
   RegisterRequest copyWith(void Function(RegisterRequest) updates) => super.copyWith((message) => updates(message as RegisterRequest));
   $pb.BuilderInfo get info_ => _i;
   static RegisterRequest create() => new RegisterRequest();
+  RegisterRequest createEmptyInstance() => create();
   static $pb.PbList<RegisterRequest> createRepeated() => new $pb.PbList<RegisterRequest>();
   static RegisterRequest getDefault() => _defaultInstance ??= create()..freeze();
   static RegisterRequest _defaultInstance;
@@ -190,6 +199,7 @@ class RegisterAnswer extends $pb.GeneratedMessage {
   RegisterAnswer copyWith(void Function(RegisterAnswer) updates) => super.copyWith((message) => updates(message as RegisterAnswer));
   $pb.BuilderInfo get info_ => _i;
   static RegisterAnswer create() => new RegisterAnswer();
+  RegisterAnswer createEmptyInstance() => create();
   static $pb.PbList<RegisterAnswer> createRepeated() => new $pb.PbList<RegisterAnswer>();
   static RegisterAnswer getDefault() => _defaultInstance ??= create()..freeze();
   static RegisterAnswer _defaultInstance;
@@ -227,6 +237,7 @@ class User extends $pb.GeneratedMessage {
   User copyWith(void Function(User) updates) => super.copyWith((message) => updates(message as User));
   $pb.BuilderInfo get info_ => _i;
   static User create() => new User();
+  User createEmptyInstance() => create();
   static $pb.PbList<User> createRepeated() => new $pb.PbList<User>();
   static User getDefault() => _defaultInstance ??= create()..freeze();
   static User _defaultInstance;
@@ -272,10 +283,9 @@ class User extends $pb.GeneratedMessage {
 
 class WishListEvent extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('WishListEvent', package: const $pb.PackageName('hot'))
-    ..aOS(1, 'token')
-    ..a<int>(2, 'indexBefore', $pb.PbFieldType.O3)
-    ..a<int>(3, 'indexAfter', $pb.PbFieldType.O3)
-    ..a<WishItem>(4, 'wishItem', $pb.PbFieldType.OM, WishItem.getDefault, WishItem.create)
+    ..e<WishListEvent_Action>(1, 'action', $pb.PbFieldType.OE, WishListEvent_Action.ADD, WishListEvent_Action.valueOf, WishListEvent_Action.values)
+    ..aOS(2, 'token')
+    ..a<WishItem>(3, 'wishItem', $pb.PbFieldType.OM, WishItem.getDefault, WishItem.create)
     ..hasRequiredFields = false
   ;
 
@@ -286,6 +296,7 @@ class WishListEvent extends $pb.GeneratedMessage {
   WishListEvent copyWith(void Function(WishListEvent) updates) => super.copyWith((message) => updates(message as WishListEvent));
   $pb.BuilderInfo get info_ => _i;
   static WishListEvent create() => new WishListEvent();
+  WishListEvent createEmptyInstance() => create();
   static $pb.PbList<WishListEvent> createRepeated() => new $pb.PbList<WishListEvent>();
   static WishListEvent getDefault() => _defaultInstance ??= create()..freeze();
   static WishListEvent _defaultInstance;
@@ -293,25 +304,20 @@ class WishListEvent extends $pb.GeneratedMessage {
     if (v is! WishListEvent) $pb.checkItemFailed(v, _i.qualifiedMessageName);
   }
 
-  String get token => $_getS(0, '');
-  set token(String v) { $_setString(0, v); }
-  bool hasToken() => $_has(0);
-  void clearToken() => clearField(1);
+  WishListEvent_Action get action => $_getN(0);
+  set action(WishListEvent_Action v) { setField(1, v); }
+  bool hasAction() => $_has(0);
+  void clearAction() => clearField(1);
 
-  int get indexBefore => $_get(1, 0);
-  set indexBefore(int v) { $_setSignedInt32(1, v); }
-  bool hasIndexBefore() => $_has(1);
-  void clearIndexBefore() => clearField(2);
+  String get token => $_getS(1, '');
+  set token(String v) { $_setString(1, v); }
+  bool hasToken() => $_has(1);
+  void clearToken() => clearField(2);
 
-  int get indexAfter => $_get(2, 0);
-  set indexAfter(int v) { $_setSignedInt32(2, v); }
-  bool hasIndexAfter() => $_has(2);
-  void clearIndexAfter() => clearField(3);
-
-  WishItem get wishItem => $_getN(3);
-  set wishItem(WishItem v) { setField(4, v); }
-  bool hasWishItem() => $_has(3);
-  void clearWishItem() => clearField(4);
+  WishItem get wishItem => $_getN(2);
+  set wishItem(WishItem v) { setField(3, v); }
+  bool hasWishItem() => $_has(2);
+  void clearWishItem() => clearField(3);
 }
 
 class WishFamilyEvent extends $pb.GeneratedMessage {
@@ -331,6 +337,7 @@ class WishFamilyEvent extends $pb.GeneratedMessage {
   WishFamilyEvent copyWith(void Function(WishFamilyEvent) updates) => super.copyWith((message) => updates(message as WishFamilyEvent));
   $pb.BuilderInfo get info_ => _i;
   static WishFamilyEvent create() => new WishFamilyEvent();
+  WishFamilyEvent createEmptyInstance() => create();
   static $pb.PbList<WishFamilyEvent> createRepeated() => new $pb.PbList<WishFamilyEvent>();
   static WishFamilyEvent getDefault() => _defaultInstance ??= create()..freeze();
   static WishFamilyEvent _defaultInstance;
@@ -379,6 +386,7 @@ class Family extends $pb.GeneratedMessage {
   Family copyWith(void Function(Family) updates) => super.copyWith((message) => updates(message as Family));
   $pb.BuilderInfo get info_ => _i;
   static Family create() => new Family();
+  Family createEmptyInstance() => create();
   static $pb.PbList<Family> createRepeated() => new $pb.PbList<Family>();
   static Family getDefault() => _defaultInstance ??= create()..freeze();
   static Family _defaultInstance;
@@ -414,6 +422,7 @@ class WishItem extends $pb.GeneratedMessage {
   WishItem copyWith(void Function(WishItem) updates) => super.copyWith((message) => updates(message as WishItem));
   $pb.BuilderInfo get info_ => _i;
   static WishItem create() => new WishItem();
+  WishItem createEmptyInstance() => create();
   static $pb.PbList<WishItem> createRepeated() => new $pb.PbList<WishItem>();
   static WishItem getDefault() => _defaultInstance ??= create()..freeze();
   static WishItem _defaultInstance;
@@ -452,6 +461,7 @@ class WishList extends $pb.GeneratedMessage {
   WishList copyWith(void Function(WishList) updates) => super.copyWith((message) => updates(message as WishList));
   $pb.BuilderInfo get info_ => _i;
   static WishList create() => new WishList();
+  WishList createEmptyInstance() => create();
   static $pb.PbList<WishList> createRepeated() => new $pb.PbList<WishList>();
   static WishList getDefault() => _defaultInstance ??= create()..freeze();
   static WishList _defaultInstance;

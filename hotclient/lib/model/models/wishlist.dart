@@ -8,30 +8,7 @@ import 'account.dart';
 import '../../generated/hot.pb.dart' as grpc;
 import '../../generated/hot.pbgrpc.dart';
 
-abstract class Operation {
-  Operation({int indexBefore = -1, int indexAfter = -1}) {
-    _indexBefore = indexBefore;
-    _indexAfter = indexAfter;
-  }
-  int get indexBefore => _indexBefore;
-  int get indexAfter => _indexAfter;
-  int _indexBefore = -1;
-  int _indexAfter = -1;
-}
-
-class Insert extends Operation {
-  Insert(int index) : super(indexAfter: index);
-}
-
-class Remove extends Operation {
-  Remove(int index) : super(indexAfter: index);
-}
-
-class Move extends Operation {
-  Move(int from, int to) : super(indexBefore: from, indexAfter: to);
-}
-
-class Update extends Operation {}
+enum Operation { add, remove, update }
 
 abstract class IWishList extends Model {
   IWishList(StreamController<Model> controller) : super(controller);
@@ -46,10 +23,23 @@ class WishList extends IWishList {
     _network.sendRequest(
         SubscribeWishList(_account.currentUser.usrId, (dynamic data) {
       WishListEvent event = data;
-      if (event.indexBefore < 0 && event.indexAfter >= 0) {
-        _list.wishItem.insert(event.indexAfter, event.wishItem);
+    switch (event.action) {
+      case WishListEvent_Action.ADD:
+        _list.wishItem.add(event.wishItem);
         modelChanged();
-      }
+        break;
+      case WishListEvent_Action.REMOVE:
+        print('Remove wish list operation...');
+        _list.wishItem.removeWhere((grpc.WishItem item){return (item.wiId == event.wishItem.wiId);});
+        modelChanged();
+        break;
+      case WishListEvent_Action.UPDATE:
+        print('Update wish list operation...');
+        grpc.WishItem item = _list.wishItem.firstWhere((grpc.WishItem item){return (item.wiId == event.wishItem.wiId);});
+        item.title = event.wishItem.title;
+        item.description = event.wishItem.description;
+        break;
+    }
     }));
   }
 
@@ -65,9 +55,18 @@ class WishList extends IWishList {
     WishListEvent event = new WishListEvent();
     event.token = _account.currentUser.usrId;
     event.wishItem = item;
-    event.indexBefore = operation.indexBefore;
-    event.indexAfter = operation.indexAfter;
-
+    switch (operation) {
+      case Operation.add:
+        event.action = WishListEvent_Action.ADD;
+        break;
+      case Operation.remove:
+        event.action = WishListEvent_Action.REMOVE;        
+        break;
+      case Operation.update:
+        event.action = WishListEvent_Action.UPDATE;            
+        break;
+      default:
+    }
     _network.sendRequest(ChangeWishList(event, (dynamic) {}));
   }
 
